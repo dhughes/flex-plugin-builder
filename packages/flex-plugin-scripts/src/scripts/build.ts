@@ -58,7 +58,9 @@ export const _handler =
 export const _runWebpack = async (): Promise<BuildBundle> => {
   return new Promise(async (resolve, reject) => {
     const config = await getConfiguration(ConfigurationType.Webpack, Environment.Production, false);
-    webpack(config).run(_handler(resolve, reject));
+    const wp = webpack(config);
+    console.log(">>>> created webpack")
+    wp.run(_handler(resolve, reject));
   });
 };
 
@@ -84,7 +86,9 @@ const build = async (...argv: string[]): Promise<void> => {
   logger.newline();
 
   try {
+    console.log(">>>> got here 3")
     const { warnings, bundles } = await _runWebpack();
+    console.log(">>>> got here 4")
     const bundleSize = getFileSizeInMB(getPaths().app.bundlePath);
     const sourceMapSize = getFileSizeInMB(getPaths().app.sourceMapPath);
 
@@ -102,6 +106,7 @@ const build = async (...argv: string[]): Promise<void> => {
 
     buildSuccessful(bundles, warnings);
   } catch (e) {
+    console.log(">>>> got here 5 (failure)")
     buildFailure(e);
     exit(1, argv);
   }
