@@ -319,7 +319,7 @@ export const _getJSPlugins = (environment: Environment): Plugin[] => {
       typescript: typescriptPath || undefined,
       async: isDev,
       useTypescriptIncrementalApi: true,
-      checkSyntacticErrors: true,
+      checkSyntacticErrors: false,
       resolveModuleNameModule: hasPnp ? `${__dirname}/webpack/pnpTs.js` : undefined,
       resolveTypeReferenceDirectiveModule: hasPnp ? `${__dirname}/webpack/pnpTs.js` : undefined,
       tsconfig: getPaths().app.tsConfigPath,
@@ -337,7 +337,7 @@ export const _getJSPlugins = (environment: Environment): Plugin[] => {
       config.formatter = typescriptFormatter;
     }
 
-    // plugins.push(new ForkTsCheckerWebpackPlugin(config));
+    plugins.push(new ForkTsCheckerWebpackPlugin(config));
   }
 
   return plugins;
