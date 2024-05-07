@@ -337,7 +337,7 @@ export const _getJSPlugins = (environment: Environment): Plugin[] => {
       config.formatter = typescriptFormatter;
     }
 
-    plugins.push(new ForkTsCheckerWebpackPlugin(config));
+    // plugins.push(new ForkTsCheckerWebpackPlugin(config));
   }
 
   return plugins;
